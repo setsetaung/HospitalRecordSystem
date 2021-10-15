@@ -1,0 +1,32 @@
+<span class="doctor-show-header"><h1>Healthcare Doctor List</h1><h3>Number of Doctors: <%= @doctors.count %></h3></span>
+<%= link_to 'Add Doctor', new_doctor_path, class: "ui button blue inverted" %>
+<hr />
+<table class="ui selectable celled striped table padded">
+  <thead>
+    <th class="center aligned">Doctor Name</th>
+    <th class="center aligned">Specialty</th>
+    <th class="center aligned">Education</th>
+    <th class="center aligned">Phone</th>
+    <th class="center aligned">Appointments</th>
+    <th class="center aligned">Update</th>
+    <th class="center aligned">Remove</th>
+  </thead>
+  <tbody>
+    <% @doctors.each do |doctor| %>
+      <tr>
+        <td><%= link_to doctor.name, doctor_appointments_path(doctor), class: "ui button red inverted" %></td>
+        <td><%= doctor.specialty %></td>
+        <td><%= doctor.school %></td>
+        <td><%= doctor.phone %></td>
+        <td><%= doctor.appointments.count %></td>
+        <td><%= button_to 'Update', edit_doctor_path(doctor), method: 'get', class:"ui button red inverted"%></td>
+        <td><%= button_to 'Remove', {:controller => :doctors, :action => 'destroy', :id => doctor.id }, :method => :delete, class:"ui button red inverted" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+<%= will_paginate @doctors %>
+
+
+
