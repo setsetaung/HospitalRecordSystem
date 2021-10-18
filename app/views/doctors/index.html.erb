@@ -1,6 +1,8 @@
+<div class="ui container body-container">
 <span class="doctor-show-header"><h1>Healthcare Doctor List</h1><h3>Number of Doctors: <%= @doctors.count %></h3></span>
 <%= link_to 'Add Doctor', new_doctor_path, class: "ui button blue inverted" %>
 <hr />
+
 <table class="ui selectable celled striped table padded">
   <thead>
     <th class="center aligned">Doctor Name</th>
@@ -27,6 +29,7 @@
 
 </table>
 <%= will_paginate @doctors %>
+</div>
 
 
 

@@ -18,7 +18,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    background-color: #39d;
+    background-color: #EDC7B7;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.3),2px 2px 10px rgba(0,0,0,0.1);
 
     .nav-links {
@@ -30,7 +30,7 @@
 
         a {
             padding: 20px;
-            color: white;
+            color: black;
             &:hover {
                 background-color: rgb(88, 172, 228);
             }
@@ -39,12 +39,16 @@
 
     .user-login {
         padding: 20px 0 20px 20px;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.87);
+        color: black;
+        background-color: #EDC7B7;
+        &:hover {
+            color: white;
+        }
 
         .logout {
             padding: 20px;
-            color: #39d;
+            color: black;
+            background-color: #EDC7B7;
             &:hover {
                 color: white;
             }
