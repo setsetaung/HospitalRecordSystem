@@ -1,7 +1,7 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show,:destroy]
   def index
-    @patients = Patient.all.order("last_name")
+    @patients = Patient.all.order("last_name").paginate(page: params[:page],per_page: 4)
   end
 
   def show
@@ -21,6 +21,22 @@ class PatientsController < ApplicationController
       redirect_to patients_path
     else
       render :new
+    end
+  end
+
+  def edit
+   
+  end
+
+  def update
+    
+    @patient.update(patient_params)
+
+    if @patient.save
+      redirect_to patients_path
+    else
+      flash[:error] = 'Failed to add Edit doctor!'   
+      render :edit
     end
   end
 

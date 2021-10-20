@@ -34,7 +34,7 @@ class DoctorsController < ApplicationController
     if @doctor.save
       redirect_to doctors_path
     else
-      flash[:error] = 'Failed to add new doctor!'   
+      flash[:error] = 'Failed to add Edit doctor!'   
       render :edit
     end
   end

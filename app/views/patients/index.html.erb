@@ -1,5 +1,5 @@
 <div class="ui container body-container">
-<span class="doctor-show-header"><h1>Intermountain Healthcare Patient List</h1><h3>Number of Patients:  <%= @patients.count %></h3></span>
+<span class="doctor-show-header"><h1>Healthcare Patient List</h1><h3>Number of Patients:  <%= @patients.count %></h3></span>
 <%= link_to 'Add Patient', new_patient_path, class:"ui button blue inverted"%>
 <br />
 <br />
@@ -16,6 +16,7 @@
     <th class="center aligned">State</th>
     <th class="center aligned">Zip</th>
     <th class="center aligned">Preferred Language</th>
+    <th class="center aligned">Update</th>
     <th class="center aligned">Remove</th>
   </thead>
   <tbody>
@@ -30,10 +31,12 @@
         <td><%= patient.state %></td>
         <td><%= patient.zip %></td>
         <td><%= patient.language %></td>
+        <td><%= button_to 'Update', edit_patient_path(patient), method: 'get', class:"ui button red inverted"%></td>
         <td><%= button_to 'Remove', {:controller => :patients, :action => 'destroy', :id => patient.id }, :method => :delete, class:"ui button red inverted" %></td>
       </tr>
     <% end %>
   </tbody>
 
 </table>
+<%= will_paginate @doctors %>
 </div>

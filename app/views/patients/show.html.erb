@@ -1,3 +1,4 @@
+<div class="ui container body-container">
 <h1><%= @patient.full_name%></h1>
 <h2 class="ui center aligned blue header">Patient Information</h2>
 <table class="ui definition table user-info selectable">
@@ -46,6 +47,10 @@
     <td><%= @patient.language %></td>
 </tr>
 <tr>
+    <td>Update Patient:</td>
+    <td><%= button_to 'Update', edit_patient_path(@patient), method: 'get', class:"ui button red inverted"%></td>
+</tr>
+<tr>
     <td>Remove Patient:</td>
     <td><%= button_to 'Delete', {:controller => :patients, :action => 'destroy', :id => @patient }, :method => :delete, class:"ui button red inverted" %></td>
 </tr>
@@ -69,7 +74,7 @@
         <tbody>
             <% @appointments.each_with_index do |appt,i| %>
                 <tr>
-                    <td><%= link_to appt.doctor.name, doctor_appointments_path(appt.doctor),class:"ui button basic" %></td>
+                    <td><%= link_to appt.doctor.name, doctor_appointments_path(appt.doctor),class:"ui button red inverted" %></td>
                     <td><%= appt.doctor.specialty %></td>
                     <td><%= appt.doctor.phone %></td>
                     <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
@@ -110,6 +115,7 @@
     <%= link_to "Add Note", new_patient_note_path(@patient), class:"ui button blue" %>
     
 </div>  
+</div>
 
 
 
