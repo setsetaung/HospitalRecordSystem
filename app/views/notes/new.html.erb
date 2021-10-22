@@ -1,0 +1,11 @@
+<div class="ui container body-container">
+<h1>Add Note For <%= @patient.full_name %></h1>
+<%= form_with(model: [@patient, @note], local: true, class: "ui form" ) do |f| %>
+  <div class="field">
+    <%= f.label :message %>
+    <%= f.text_area :message, required: true, placeholder: "Message", rows: 10, autofocus: true %>
+  </div>
+  <%= f.submit nil, class: "ui blue button" %>
+<% end %>
+</div>
+
