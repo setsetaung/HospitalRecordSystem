@@ -1,0 +1,38 @@
+<div class="ui container body-container">
+<span class="doctor-show-header"><h1><%= @doctor.name %> Appointments</h1><h3>Specialty: <%= @doctor.specialty %></h3></span>
+
+<%= link_to 'Add Appointment', new_doctor_appointment_path(@doctor), class:"ui button blue inverted" %>
+<br />
+<br />
+<hr />
+
+
+<table class="ui celled table">
+  <thead>
+    <th>Patient Name</th>
+    <th>Patient Age</th>
+    <th>Patient Date of Birth</th>
+    <th>Appointment Date</th>
+    <th>Appointment Time</th>
+    <th>Update</th>
+    <th>Remove</th>
+  </thead>
+  <tbody>
+    <% @appointments.each do |appt| %>
+      <tr>
+        <td><%= link_to appt.patient.full_name, patient_path(appt.patient), class: "ui basic button"%></td>
+        <td><%= appt.patient.age %></td>
+        <td><%= appt.patient.dob %></td>
+        <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
+        <td><%= appt.time.strftime("%l:%M %p")  %></td>
+        <td><%= button_to 'Update', doctor_appointment_path(appt.doctor_id, appt.id), method: 'get', class:"ui button red inverted"%></td>
+        <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+</div>
+
+
+
