@@ -20,13 +20,14 @@
   <tbody>
     <% @appointments.each do |appt| %>
       <tr>
-        <td><%= link_to appt.patient.full_name, patient_path(appt.patient), class: "ui basic button"%></td>
+        <td><%= link_to appt.patient.full_name, patient_path(appt.patient), class: "ui blue button inverted"%></td>
         <td><%= appt.patient.age %></td>
         <td><%= appt.patient.dob %></td>
         <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
         <td><%= appt.time.strftime("%l:%M %p")  %></td>
-        <td><%= button_to 'Update', doctor_appointment_path(appt.doctor_id, appt.id), method: 'get', class:"ui button red inverted"%></td>
-        <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+        
+        <td><%= link_to 'Update', edit_doctor_appointment_path(appt.doctor_id, appt.id), class:"ui blue button inverted" %></td>
+        <td><%= button_to 'Remove', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
       </tr>
     <% end %>
   </tbody>

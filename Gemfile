@@ -15,6 +15,7 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap-style'
+gem 'devise-i18n'
 
 
 group :development, :test do

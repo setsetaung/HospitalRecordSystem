@@ -20,6 +20,22 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def edit
+    @doctor=set_doctor
+    @appointment=set_appointment
+    @patient=set_patients
+  end
+
+  def update
+    @appointment = Appointment.find(params[:id])
+    if @appointment.update(update_appointment_params)
+      redirect_to doctor_appointments_path
+    else
+      render :edit
+    end
+  end
+  
+
   def destroy
     @doctor.appointments.find(params[:id]).destroy
     redirect_to doctor_appointments_path
@@ -40,6 +56,10 @@ class AppointmentsController < ApplicationController
 
     def appointment_params
       params.require(:appointment).permit(:patient_id, :date, :time)
+    end
+
+    def update_appointment_params
+      params.require(:appointment).permit(:date, :time)
     end
 end
 

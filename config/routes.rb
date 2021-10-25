@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   
   resources :patients
   resources :doctors do
-    resources :appointments, only: [:index,:new, :create, :destroy]
+    resources :appointments, only: [:index,:new, :create, :edit, :update, :destroy]
+    
   end
 
   resources :patients do

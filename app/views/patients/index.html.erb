@@ -22,7 +22,7 @@
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
-        <td><%= link_to patient.full_name, patient_path(patient), class: "ui button red inverted" %></td>
+        <td><%= link_to patient.full_name, patient_path(patient), class: "ui button blue inverted" %></td>
         <td><%= patient.age %></td>
         <td><%= patient.dob.strftime('%m/%d/%Y') %></td>
         <td><%= patient.sex == "Male" ? "M" : "F" %></td>
@@ -31,7 +31,7 @@
         <td><%= patient.state %></td>
         <td><%= patient.zip %></td>
         <td><%= patient.language %></td>
-        <td><%= button_to 'Update', edit_patient_path(patient), method: 'get', class:"ui button red inverted"%></td>
+        <td><%= button_to 'Update', edit_patient_path(patient), method: 'get', class:"ui button blue inverted"%></td>
         <td><%= button_to 'Remove', {:controller => :patients, :action => 'destroy', :id => patient.id }, :method => :delete, class:"ui button red inverted" %></td>
       </tr>
     <% end %>

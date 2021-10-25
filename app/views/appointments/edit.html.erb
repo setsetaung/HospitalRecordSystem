@@ -1,0 +1,14 @@
+<div class="ui container body-container">
+<h1>Edit Appointment</h1>
+<%= form_with(model: [@doctor, @appointment], local: true, class: "ui form" ) do |f| %>
+ 
+  <%= f.label :date %>
+  <%= f.date_field :date %>
+  <br />
+  <%= f.label :time %>
+  <%= f.time_field :time %>
+  <br />
+  <br />
+  <%= f.submit nil, class: "ui basic button" %>
+<% end %>
+</div>

@@ -48,7 +48,7 @@
 </tr>
 <tr>
     <td>Update Patient:</td>
-    <td><%= button_to 'Update', edit_patient_path(@patient), method: 'get', class:"ui button red inverted"%></td>
+    <td><%= button_to 'Update', edit_patient_path(@patient), method: 'get', class:"ui button blue inverted"%></td>
 </tr>
 <tr>
     <td>Remove Patient:</td>
@@ -74,12 +74,12 @@
         <tbody>
             <% @appointments.each_with_index do |appt,i| %>
                 <tr>
-                    <td><%= link_to appt.doctor.name, doctor_appointments_path(appt.doctor),class:"ui button red inverted" %></td>
+                    <td><%= link_to appt.doctor.name, doctor_appointments_path(appt.doctor),class:"ui button blue inverted" %></td>
                     <td><%= appt.doctor.specialty %></td>
                     <td><%= appt.doctor.phone %></td>
                     <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
                     <td><%= appt.time.strftime("%l:%M %p") %></td>
-                    <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+                    <td><%= button_to 'Remove', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
                 </tr>
             <% end %>
         </tbody>
@@ -94,6 +94,8 @@
         <div class="note">
             <p class="message-body"><%= note.message %></p>
             <div class="poster-info">
+                <%= note.user.full_name %>
+                <br />
                 <%= note.created_at.strftime("%b %d, %Y") %>
                 <br />
                 <%= note.created_at.in_time_zone("Central Time (US & Canada)").strftime("%l:%M %p") %>
