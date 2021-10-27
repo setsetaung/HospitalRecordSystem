@@ -1,17 +1,28 @@
 <div class="ui container body-container">
+
+<% if @doctor.errors.any? %>
+  <div>
+    <ol style="color:red;font-size:20px;font-style:italic;">
+      <% @doctor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>
+
   <h1>Add Doctor</h1>
   <%= form_with(model: @doctor, local: true, class: "ui form" ) do |f| %>
     <div class="field">
       <%= f.label :name %>
-      <%= f.text_field :name, required: true, placeholder: "Doctor Name" %>
+      <%= f.text_field :name,  placeholder: "Doctor Name" %>
     </div>
     <div class="field">
       <%= f.label :phone %>
-      <%= f.phone_field :phone, required: true, placeholder: "Phone" %>
+      <%= f.phone_field :phone, placeholder: "Phone" %>
     </div>
     <div class="field">
       <%= f.label :school %>
-      <%= f.text_field :school, required: true, placeholder: "School" %>
+      <%= f.text_field :school, placeholder: "School" %>
     </div>
     <div class="field">
       <%= f.label :specialty %>

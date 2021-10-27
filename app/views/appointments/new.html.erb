@@ -1,4 +1,15 @@
 <div class="ui container body-container">
+
+<% if @appointment.errors.any? %>
+  <div>
+    <ol style="color:red;font-size:20px;font-style:italic;">
+      <% @appointment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>
+
 <h1>New Appointment</h1>
 <%= form_with(model: [@doctor, @appointment], local: true, class: "ui form" ) do |f| %>
   <%= f.label :patient %>
@@ -8,7 +19,7 @@
   <%= f.date_field :date %>
   <br />
   <%= f.label :time %>
-  <%= f.time_field :time %>
+  <%= f.select "time", (9..20).to_a %>
   <br />
   <br />
   <%= f.submit nil, class: "ui green button inverted" %>

@@ -1,9 +1,20 @@
 <div class="ui container body-container">
+
+<% if @note.errors.any? %>
+  <div>
+    <ol style="color:red;font-size:20px;font-style:italic;">
+      <% @note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>
+
 <h1>Add Note For <%= @patient.full_name %></h1>
 <%= form_with(model: [@patient, @note], local: true, class: "ui form" ) do |f| %>
   <div class="field">
     <%= f.label :message %>
-    <%= f.text_area :message, required: true, placeholder: "Message", rows: 10, autofocus: true %>
+    <%= f.text_area :message, placeholder: "Message", rows: 10, autofocus: true %>
   </div>
   <%= f.submit nil, class: "ui blue button" %>
 <% end %>

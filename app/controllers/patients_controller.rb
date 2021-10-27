@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:show,:destroy]
+  before_action :set_patient, only: [:show, :edit, :update, :destroy]
   def index
     @patients = Patient.all.order("last_name").paginate(page: params[:page],per_page: 4)
   end

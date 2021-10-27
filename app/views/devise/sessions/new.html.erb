@@ -1,15 +1,17 @@
 <div class="log-in-container">
 
-  
-
   <%= form_for(resource, as: resource_name, class:"ui form", url: session_path(resource_name)) do |f| %>
     <%= image_tag("logo.png", :alt => "Intermountain Logo",class:"logo") %>
+    
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <p style="color:red;font-style:italic;" class="notice"><%= notice %></p>
+    <p style="color:red;font-style:italic;" class="alert"><%= alert %></p>
     <div class="field">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"input", placeholder: "Email", required: true %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"input", placeholder: "Email" %>
     </div>
 
     <div class="field">
-      <%= f.password_field :password, autocomplete: "current-password", class:"input", placeholder: "Password", required: true  %>
+      <%= f.password_field :password, autocomplete: "current-password", class:"input", placeholder: "Password"  %>
     </div>
 
     <div class="actions">
