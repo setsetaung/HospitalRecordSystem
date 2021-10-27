@@ -1,6 +1,6 @@
 <div class="ui container body-container">
 
-<% if @appointment.errors.any? %>
+<% if @appointment && @appointment.errors.any? %>
   <div>
     <ol style="color:red;font-size:20px;font-style:italic;">
       <% @appointment.errors.full_messages.each do |message| %>
@@ -8,6 +8,10 @@
       <% end %>
     </ol>
   </div>
+<% end %>
+
+<% if error.present? %>
+    <p class="alert alert-danger"><%= error %></p>
 <% end %>
 
 <h1>New Appointment</h1>
@@ -24,4 +28,5 @@
   <br />
   <%= f.submit nil, class: "ui green button inverted" %>
 <% end %>
+
 </div>

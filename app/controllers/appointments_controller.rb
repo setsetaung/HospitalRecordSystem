@@ -2,6 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show]
   before_action :set_doctor
   before_action :set_patients, only: [:new, :create]
+  require 'time'
   def index
     @appointments = @doctor.appointments.order(:date, :time)
   end
@@ -12,13 +13,26 @@ class AppointmentsController < ApplicationController
   end
 
   def create
+  
     @appointment = @doctor.appointments.new(appointment_params)
-    if @appointment.save
-      redirect_to doctor_appointments_path
+    datetime=("2000-01-01 " + (params[:appointment][:time]) + ":00:00").to_datetime
+
+    @appt=Appointment.where("doctor_id = ? and date = ? and time = ?", params[:doctor_id], params[:appointment][:date], datetime).count
+       
+    if @appt > 0
+
+      # flash.now[:alert] = 'Appointment have. Change other Time!' 
+      redirect_to new_doctor_appointment_path, error: "Appointment have. Change other Time!"
+  
     else
-      render :new
+      if @appointment.save
+        redirect_to doctor_appointments_path
+      else
+        render :new
+      end
     end
   end
+
 
   def edit
     @doctor=set_doctor
@@ -28,10 +42,20 @@ class AppointmentsController < ApplicationController
 
   def update
     @appointment = Appointment.find(params[:id])
-    if @appointment.update(update_appointment_params)
-      redirect_to doctor_appointments_path
+    datetime=("2000-01-01 " + (params[:appointment][:time]) + ":00:00").to_datetime
+
+    @appt=Appointment.where("doctor_id = ? and date = ? and time = ?", params[:doctor_id], params[:appointment][:date], datetime).count
+       
+    if @appt > 0
+      
+      redirect_to edit_doctor_appointment_path, error: "Appointment have. Change other Time!"
+  
     else
-      render :edit
+      if @appointment.update(update_appointment_params)
+        redirect_to doctor_appointments_path
+      else
+        render :edit
+      end
     end
   end
   

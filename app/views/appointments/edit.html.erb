@@ -10,6 +10,10 @@
   </div>
 <% end %>
 
+<% if error.present? %>
+    <p class="alert alert-danger"><%= error %></p>
+<% end %>
+
 <h1>Edit Appointment</h1>
 <%= form_with(model: [@doctor, @appointment], local: true, class: "ui form" ) do |f| %>
  
