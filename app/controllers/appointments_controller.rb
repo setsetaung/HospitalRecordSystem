@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
   before_action :set_patients, only: [:new, :create]
   require 'time'
   def index
-    @appointments = @doctor.appointments.order(:date, :time)
+    @appointments = @doctor.appointments.order(:date, :time).paginate(page: params[:page],per_page: 4)
   end
 
 
@@ -16,15 +16,20 @@ class AppointmentsController < ApplicationController
   
     @appointment = @doctor.appointments.new(appointment_params)
     datetime=("2000-01-01 " + (params[:appointment][:time]) + ":00:00").to_datetime
+    
 
     @appt=Appointment.where("doctor_id = ? and date = ? and time = ?", params[:doctor_id], params[:appointment][:date], datetime).count
-       
-    if @appt > 0
+    @patient=Appointment.where("patient_id = ? and date = ? and time = ?", params[:appointment][:patient_id], params[:appointment][:date], datetime).count
+    
+    if @appt > 0 || @patient > 0
 
-      # flash.now[:alert] = 'Appointment have. Change other Time!' 
-      redirect_to new_doctor_appointment_path, error: "Appointment have. Change other Time!"
-  
+      if @appt>0
+        redirect_to new_doctor_appointment_path, error: "Appointment have. Change other Time!"   
+      else
+        redirect_to new_doctor_appointment_path, error: "Other Doctor Appointment have. Change other Time!"   
+      end
     else
+      
       if @appointment.save
         redirect_to doctor_appointments_path
       else
@@ -42,16 +47,22 @@ class AppointmentsController < ApplicationController
 
   def update
     @appointment = Appointment.find(params[:id])
-    datetime=("2000-01-01 " + (params[:appointment][:time]) + ":00:00").to_datetime
 
-    @appt=Appointment.where("doctor_id = ? and date = ? and time = ?", params[:doctor_id], params[:appointment][:date], datetime).count
-       
-    if @appt > 0
+    datetime=("2000-01-01 " + (params[:appointment][:time]) + ":00:00").to_datetime
       
-      redirect_to edit_doctor_appointment_path, error: "Appointment have. Change other Time!"
-  
+    @appt=Appointment.where("doctor_id = ? and date = ? and time = ?", params[:doctor_id], params[:appointment][:date], datetime).count
+    @patient=Appointment.where("patient_id = ? and date = ? and time = ?", @appointment.patient_id, params[:appointment][:date], datetime).count
+    
+    if @appt > 0 || @patient > 0
+
+      if @appt>0
+        redirect_to edit_doctor_appointment_path, error: "Appointment have. Change other Time!"   
+      else
+        redirect_to edit_doctor_appointment_path, error: "Other Doctor Appointment have. Change other Time!"   
+      end
     else
-      if @appointment.update(update_appointment_params)
+      
+      if @appointment.update(appointment_params)
         redirect_to doctor_appointments_path
       else
         render :edit
@@ -82,9 +93,6 @@ class AppointmentsController < ApplicationController
       params.require(:appointment).permit(:patient_id, :date, :time)
     end
 
-    def update_appointment_params
-      params.require(:appointment).permit(:date, :time)
-    end
 end
 
 
